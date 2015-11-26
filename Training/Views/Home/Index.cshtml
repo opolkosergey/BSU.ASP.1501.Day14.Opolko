@@ -33,6 +33,9 @@
     </div>
 </div>
 
-<div class="btn-group">
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
-</div>
+@if (Model.PageInfo.TotalPages != 1)
+{
+    <div class="btn-group">
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new {page = x}))
+    </div>
+}

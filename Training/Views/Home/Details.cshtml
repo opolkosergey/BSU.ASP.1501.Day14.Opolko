@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "Details";
 }
-<h2>@ViewBag.Title.</h2>
+
 <br />
 <div class="row">
 
     <div class="col-md-4">
-        <h4>Студенты на тренинге @ViewBag.TrainingTitle </h4>
+        <h4>Студенты на тренинге @ViewBag.trainingName </h4>
         <div class="panel panel-default">
             <div class="panel-body">
                 @foreach (var s in ViewBag.Students)
@@ -17,8 +17,6 @@
                 }
             </div>
         </div>
-
-
     </div>
     <div class="col-md-4">
     </div>
@@ -44,7 +42,6 @@
         {
             @Html.Label(i.ToString())
             @Html.RadioButtonFor(m => m.UniversityClass, i)
-            
         }
     </div>
 
@@ -68,5 +65,4 @@
     </div>
 
     <input type="submit" class="btn btn-primary" value="Готово"/>
-
 }

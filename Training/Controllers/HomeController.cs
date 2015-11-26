@@ -27,6 +27,7 @@ namespace Training.Controllers
             var db = new ApplicationDbContext();
             var training = db.Trainings.First(t => t.Id == id);
             ViewBag.Students = training.Students;
+            ViewBag.trainingName = training.Name;
             TempData["TrainingTitle"] = training.Name;
             return View();
         }
