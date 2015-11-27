@@ -1,0 +1,108 @@
+﻿@model Trainings.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#send").click(function () {
+                
+            var m_method = $("form#sendingForm").attr('method');
+            var m_action = $("form#sendingForm").attr('action');
+            var m_data = $("form#sendingForm").serialize();
+
+                $.ajax({
+                    type: m_method,
+                    url: m_action,
+                    data: m_data,
+                    success: function(result) {
+                        $('#StudentsList').append(result);
+                        document.getElementById('sendingForm').reset();
+                    }
+            });
+            return false;
+        }
+        );
+        
+    });
+</script>
+@{
+    List<SelectListItem> list = new List<SelectListItem>();
+    list.Add(new SelectListItem
+    {
+        Value = "-1",
+        Text = "Select university"
+    });
+    list.Add(new SelectListItem() {Value = "BSUIR",Text = "BSUIR"});
+    list.Add(new SelectListItem() { Value = "BSU", Text = "BSU"});
+    list.Add(new SelectListItem() { Value = "BSEU", Text = "BSEU"});
+}
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <h4>Студенты на тренинге @ViewBag.trainingName </h4>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul id="StudentsList">
+                    @foreach (var s in ViewBag.Students)
+                    {
+                        <li>@s.FirstName @s.LastName @s.University @s.UniversityClass cource</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+@using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" ,@id = "sendingForm"}))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    @*<div class="form-group-sm">
+        <select class="form-control" name="University" required>
+            <option value="" selected="selected" content="empty" class="text-muted edit">Выберите университет</option>
+            <option value="BSUIR">BSUIR</option>
+            <option value="BSU">BSU</option>
+        </select>
+    </div>*@
+
+    <div class="form-group-sm">
+        @Html.DropDownListFor(m => m.University, list)
+        @Html.ValidationMessageFor(m => m.University)
+    </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.UniversityClass)
+            @for (int i = 1; i < 6; i++)
+            {
+                @Html.Label(i.ToString())
+                @Html.RadioButtonFor(m => m.UniversityClass, i, new { @class = "edit" })
+                @Html.ValidationMessageFor(m => m.UniversityClass)
+            }
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.FirstName)
+            @Html.EditorFor(m => m.FirstName, new { @class = "edit" })
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.LastName)
+            @Html.EditorFor(m => m.LastName, new { @class = "edit" })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Email)
+            @Html.EditorFor(m => m.Email, new { @class = "edit" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+
+        <input type="submit" class="btn btn-primary" id="send" value="Готово" />
+        }
