@@ -23,6 +23,26 @@ namespace Trainings.Controllers
         }
 
         [HttpGet]
+        public ActionResult NewTraining()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewTraining(Training training)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    db.Trainings.Add(training);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             var db = new ApplicationDbContext();
@@ -44,7 +64,7 @@ namespace Trainings.Controllers
             {
                 training.Students.Add(student);
                 db.SaveChanges();
-                return Content("<li>" + student.FirstName + " " + student.LastName 
+                return Content("<li>" + student.FirstName + " " + student.LastName
                                 + " " + student.University + " " + student.UniversityClass +
                                 " cource</li>");
             }
@@ -52,10 +72,10 @@ namespace Trainings.Controllers
             {
                 training.Students.Add(student);
                 db.SaveChanges();
-                return RedirectToAction("Details", new {id = training.Id});
+                return RedirectToAction("Details", new { id = training.Id });
             }
-            
-            return Content(String.Empty);
+
+            return (Request.IsAjaxRequest())? (ActionResult) Content(String.Empty) : RedirectToAction("Details", new { id = training.Id });
         }
     }
 }

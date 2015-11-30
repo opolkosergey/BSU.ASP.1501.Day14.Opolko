@@ -137,6 +137,14 @@
     <Compile Include="Migrations\201511271502030_InitDb.Designer.cs">
       <DependentUpon>201511271502030_InitDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511301613240_InitDb1.cs" />
+    <Compile Include="Migrations\201511301613240_InitDb1.Designer.cs">
+      <DependentUpon>201511301613240_InitDb1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511301617418_InitDbb.cs" />
+    <Compile Include="Migrations\201511301617418_InitDbb.Designer.cs">
+      <DependentUpon>201511301617418_InitDbb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PageHelper.cs" />
     <Compile Include="Models\PagingHelpers.cs" />
@@ -165,7 +173,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -178,6 +188,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\NewTraining.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -193,6 +204,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511271502030_InitDb.resx">
       <DependentUpon>201511271502030_InitDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511301613240_InitDb1.resx">
+      <DependentUpon>201511301613240_InitDb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511301617418_InitDbb.resx">
+      <DependentUpon>201511301617418_InitDbb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
